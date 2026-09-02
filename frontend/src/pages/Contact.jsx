@@ -2,13 +2,23 @@ import { useState } from 'react';
 import './Contact.css';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+
   const [error, setError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -21,14 +31,18 @@ export default function Contact() {
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailPattern.test(formData.email)) {
       setError('Please enter a valid email address.');
       return;
     }
 
     setSubmitting(true);
-    // Simulate submission — wire this to a real backend endpoint
-    // (e.g. POST /api/contact) if the project requires persisted messages.
+
+    // Simulate submission.
+    // Connect this to a backend endpoint such as POST /api/contact
+    // if messages need to be stored in the database.
+
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
@@ -49,7 +63,10 @@ export default function Contact() {
   return (
     <div className="contact-page">
       <h1>Contact Us</h1>
-      <p className="contact-subtitle">We'd love to hear from you. Send us a message below.</p>
+
+      <p className="contact-subtitle">
+        We'd love to hear from you. Send us a message below.
+      </p>
 
       {error && <div className="contact-error">{error}</div>}
 
@@ -57,31 +74,59 @@ export default function Contact() {
         <div className="contact-form-row">
           <label>
             Name
-            <input name="name" value={formData.name} onChange={handleChange} />
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
+
           <label>
             Email
-            <input type="email" name="email" value={formData.email} onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </label>
         </div>
 
         <div className="contact-form-row">
           <label>
             Phone
-            <input name="phone" value={formData.phone} onChange={handleChange} />
+            <input
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
           </label>
+
           <label>
             Subject
-            <input name="subject" value={formData.subject} onChange={handleChange} />
+            <input
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+            />
           </label>
         </div>
 
         <label>
           Message
-          <textarea name="message" rows={6} value={formData.message} onChange={handleChange} />
+          <textarea
+            name="message"
+            rows={6}
+            value={formData.message}
+            onChange={handleChange}
+          />
         </label>
 
-        <button type="submit" className="btn btn-primary" disabled={submitting}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={submitting}
+        >
           {submitting ? 'Sending...' : 'Send Message'}
         </button>
       </form>

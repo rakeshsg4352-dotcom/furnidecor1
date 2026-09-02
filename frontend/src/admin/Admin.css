@@ -1,0 +1,328 @@
+.admin-page {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 80vh;
+}
+
+.admin-sidebar {
+  background-color: #2b2420;
+  padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar h3 {
+  color: #fff;
+  font-size: 16px;
+  padding: 0 24px 20px;
+  margin: 0;
+  border-bottom: 1px solid #443a33;
+  margin-bottom: 10px;
+}
+
+.admin-sidebar a {
+  color: #d8cdbf;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 12px 24px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-sidebar a:hover {
+  background-color: #3a322b;
+  color: #fff;
+}
+
+.admin-sidebar a.active {
+  background-color: #a1673d;
+  color: #fff;
+  font-weight: 600;
+}
+
+.admin-content {
+  padding: 32px 40px;
+  background-color: #faf7f2;
+}
+
+.admin-content h1 {
+  font-size: 26px;
+  color: #2b2420;
+  margin: 0 0 28px;
+}
+
+.admin-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.admin-content-header h1 {
+  margin: 0;
+}
+
+.admin-btn {
+  background-color: #2b2420;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-btn:hover {
+  background-color: #a1673d;
+}
+
+/* ---- Stats grid (Dashboard) ---- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.stat-card {
+  background-color: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-card.warning {
+  border-color: #f0d9a8;
+  background-color: #fdf7ea;
+}
+
+.stat-card.danger {
+  border-color: #f0c9c5;
+  background-color: #fdf1f0;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #8a7f72;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2b2420;
+}
+
+.admin-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.admin-panel {
+  background-color: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.admin-panel h3 {
+  font-size: 15px;
+  color: #2b2420;
+  margin: 0 0 14px;
+}
+
+.admin-panel-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #4a4038;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5efe6;
+}
+
+.admin-panel-empty {
+  font-size: 13px;
+  color: #a89d8f;
+}
+
+/* ---- Tables (shared by Products/Categories/Rooms/Orders/Users/Inventory) ---- */
+.admin-table-wrapper {
+  background-color: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background-color: #f5efe6;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #4a4038;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.admin-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #4a4038;
+  border-top: 1px solid #f5efe6;
+}
+
+.admin-table img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.admin-table-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-link-btn {
+  background: none;
+  border: none;
+  color: #a1673d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.admin-link-btn.danger {
+  color: #b3413a;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.badge-instock { background-color: #e2f5e2; color: #2f8a2f; }
+.badge-lowstock { background-color: #fdf1d8; color: #a5760a; }
+.badge-outofstock { background-color: #fbeae8; color: #b3413a; }
+
+/* ---- Modal (Add/Edit forms) ---- */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+
+.admin-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.admin-modal h2 {
+  font-size: 19px;
+  color: #2b2420;
+  margin: 0 0 20px;
+}
+
+.admin-form-group {
+  margin-bottom: 16px;
+}
+
+.admin-form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4038;
+  margin-bottom: 6px;
+}
+
+.admin-form-group input,
+.admin-form-group select,
+.admin-form-group textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #e3d9cb;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.admin-modal-cancel {
+  background: none;
+  border: 1px solid #d8cdbf;
+  color: #4a4038;
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.admin-error {
+  background-color: #fbeae8;
+  color: #b3413a;
+  border: 1px solid #f0c9c5;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .admin-page {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 12px 0;
+  }
+
+  .admin-sidebar h3 {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-panels {
+    grid-template-columns: 1fr;
+  }
+}

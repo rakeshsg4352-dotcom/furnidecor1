@@ -1,0 +1,70 @@
+.filter-sidebar {
+  background-color: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 10px;
+  padding: 20px;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter-header h3 {
+  font-size: 17px;
+  color: #2b2420;
+  margin: 0;
+}
+
+.filter-clear {
+  background: none;
+  border: none;
+  color: #a1673d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-group {
+  margin-bottom: 22px;
+}
+
+.filter-group h4 {
+  font-size: 13px;
+  color: #4a4038;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #e3d9cb;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #2b2420;
+  box-sizing: border-box;
+}
+
+.filter-price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-price-inputs input {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .filter-sidebar {
+    position: static;
+  }
+}

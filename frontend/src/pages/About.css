@@ -1,0 +1,44 @@
+.about-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.about-hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.about-hero h1 {
+  font-size: 32px;
+  color: #2b2420;
+  margin: 0 0 12px;
+}
+
+.about-hero p {
+  color: #8a7f72;
+  font-size: 16px;
+}
+
+.about-section {
+  margin-bottom: 36px;
+}
+
+.about-section h2 {
+  font-size: 20px;
+  color: #2b2420;
+  margin: 0 0 12px;
+}
+
+.about-section p {
+  color: #6b5f52;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.about-section ul {
+  color: #6b5f52;
+  line-height: 1.9;
+  font-size: 15px;
+  padding-left: 20px;
+}

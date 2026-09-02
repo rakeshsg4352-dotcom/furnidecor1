@@ -1,0 +1,165 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../services/api';
+import Loading from '../components/Loading';
+import './Admin.css';
+
+const emptyForm = { name: '', description: '', image_url: '' };
+
+export default function AdminRooms() {
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [formData, setFormData] = useState(emptyForm);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    loadRooms();
+  }, []);
+
+  const loadRooms = async () => {
+    setLoading(true);
+    try {
+      const res = await api.get('/rooms');
+      setRooms(res.data);
+    } catch (err) {
+      console.error('Failed to load rooms:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openAddModal = () => {
+    setEditingId(null);
+    setFormData(emptyForm);
+    setError('');
+    setShowModal(true);
+  };
+
+  const openEditModal = (room) => {
+    setEditingId(room.id);
+    setFormData({ name: room.name, description: room.description || '', image_url: room.image_url || '' });
+    setError('');
+    setShowModal(true);
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.name) {
+      setError('Room name is required.');
+      return;
+    }
+
+    try {
+      if (editingId) {
+        await api.put('/rooms/' + editingId, formData);
+      } else {
+        await api.post('/rooms', formData);
+      }
+      setShowModal(false);
+      loadRooms();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to save room.');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this room? Its recommendations will also be removed.')) return;
+    try {
+      await api.delete('/rooms/' + id);
+      loadRooms();
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to delete room.');
+    }
+  };
+
+  if (loading) return <Loading />;
+
+  return (
+    <div className="admin-page">
+      <div className="admin-sidebar">
+        <h3>Admin Panel</h3>
+        <Link to="/admin">Dashboard</Link>
+        <Link to="/admin/products">Products</Link>
+        <Link to="/admin/categories">Categories</Link>
+        <Link to="/admin/rooms" className="active">Rooms</Link>
+        <Link to="/admin/orders">Orders</Link>
+        <Link to="/admin/inventory">Inventory</Link>
+        <Link to="/admin/users">Users</Link>
+      </div>
+
+      <div className="admin-content">
+        <div className="admin-content-header">
+          <h1>Rooms</h1>
+          <button className="admin-btn" onClick={openAddModal}>Add Room</button>
+        </div>
+
+        <div className="admin-table-wrapper">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rooms.map((r) => (
+                <tr key={r.id}>
+                  <td><img src={r.image_url} alt={r.name} onError={(e) => { e.target.src = 'https://via.placeholder.com/40x40'; }} /></td>
+                  <td>{r.name}</td>
+                  <td>{r.description}</td>
+                  <td>
+                    <div className="admin-table-actions">
+                      <button className="admin-link-btn" onClick={() => openEditModal(r)}>Edit</button>
+                      <button className="admin-link-btn danger" onClick={() => handleDelete(r.id)}>Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p style={{ fontSize: '13px', color: '#8a7f72', marginTop: '16px' }}>
+          To manage which products are recommended for each room, use the database seed file or extend this page with a recommendations editor.
+        </p>
+      </div>
+
+      {showModal && (
+        <div className="admin-modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>{editingId ? 'Edit Room' : 'Add Room'}</h2>
+            {error && <div className="admin-error">{error}</div>}
+            <form onSubmit={handleSubmit}>
+              <div className="admin-form-group">
+                <label>Name</label>
+                <input name="name" value={formData.name} onChange={handleChange} />
+              </div>
+              <div className="admin-form-group">
+                <label>Description</label>
+                <textarea name="description" rows={3} value={formData.description} onChange={handleChange} />
+              </div>
+              <div className="admin-form-group">
+                <label>Image URL</label>
+                <input name="image_url" value={formData.image_url} onChange={handleChange} />
+              </div>
+              <div className="admin-modal-actions">
+                <button type="button" className="admin-modal-cancel" onClick={() => setShowModal(false)}>Cancel</button>
+                <button type="submit" className="admin-btn">{editingId ? 'Update' : 'Create'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

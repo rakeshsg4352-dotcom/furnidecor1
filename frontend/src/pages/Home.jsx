@@ -114,7 +114,7 @@ export default function Home() {
       </section>
 
       <section className="cta-banner">
-        <h2>Your dream space starts here.</h2>
+        <h2>Your dream space starts next here .</h2>
         <Link to="/furniture" className="btn btn-primary">Explore Collection</Link>
       </section>
     </div>
